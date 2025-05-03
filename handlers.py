@@ -20,10 +20,12 @@ async def getHelp(message: Message):
 async def start(message: Message):
     await message.answer("Заглушка для команды send")
 
-@router.message(Command('check'))
-async def start(message: Message):
-    await message.answer("Заглушка для команды check")
 
 @router.message(Command('check'))
 async def start(message: Message):
     await message.answer("Заглушка для команды check")
+
+
+@router.message(Command('edit'))
+async def start(message: Message):
+    await message.answer("Заглушка для команды edit")
