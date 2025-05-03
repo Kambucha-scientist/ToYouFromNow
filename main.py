@@ -1,16 +1,19 @@
 import asyncio
-import logging
+#import logging
 
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 from handlers import router
+import databaseInterface
 import os
 
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher()
 
+
 async def main():
+    databaseInterface.createTable()
     dp.include_router(router)
     await dp.start_polling(bot)
 
