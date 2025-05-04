@@ -1,2 +1,2 @@
 /.env
-/messages.db
+/db.sqlite3
