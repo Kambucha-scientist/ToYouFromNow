@@ -3,6 +3,8 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.fsm.state import StatesGroup,State
 from aiogram.fsm.context import FSMContext
+from parsing_date import parse_date
+from requests import addMessage
 
 
 router = Router()
@@ -39,10 +41,14 @@ async def getText(message: Message, state: FSMContext):
 
 @router.message(Parser.date)
 async def getDate(message: Message, state: FSMContext):
-    await state.update_data(data=message.text)
-    data = await state.get_data()
-    await message.answer(f"Увидимся в {data["date"]} !")
-    await state.clear()
+    try:
+        await state.update_data(date=parse_date(message.text))
+        data = await state.get_data()
+        await addMessage(message.from_user.id, message.chat.id, data["date"], data["text"])
+        await message.answer(f"Увидимся в {data["date"]} !")
+        await state.clear()
+    except ValueError:
+        await message.answer("Ой! Не смог расспознать дату :<. Попробуй ещё раз!")
 
 @router.message(Command('check'))
 async def check(message: Message):
