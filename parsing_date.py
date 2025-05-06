@@ -1,5 +1,6 @@
 import dateparser
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 def parse_date(text: str) -> datetime:
     settings = {
         'PREFER_DATES_FROM': 'future',  # Только будущие даты
@@ -10,3 +11,5 @@ def parse_date(text: str) -> datetime:
         raise ValueError("Не могу распознать дату :(")
     return parsed
 
+def convertToMoscowTime(time: datetime)->datetime:
+    return time.astimezone(ZoneInfo("Europe/Moscow"))
