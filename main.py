@@ -31,7 +31,7 @@ async def check_messages():
             if datetime.now(ZoneInfo('Europe/Moscow')) >= convertToMoscowTime(msg.sending_time):
                 logger.info(datetime.now(ZoneInfo('Europe/Moscow')))
                 logger.info(convertToMoscowTime(msg.sending_time))
-                await bot.send_message(msg.chat_id, f"🔮 Ваше сообщение из прошлого:\n{msg.message_text}")
+                await bot.send_message(msg.chat_id, f"Время пришло! Время чего? Время слов из прошлого!\n\n\n{msg.message_text}")
                 await wasSent(msg.id)
         await asyncio.sleep(60)
 

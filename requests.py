@@ -9,6 +9,10 @@ async def getUnsentMessages():
         return await session.scalars(select(Message).where(Message.is_sent == 0).order_by(Message.sending_time))
 
 
+async def messagesByUser(user_id: int):
+    async with async_session() as session:
+        return await session.scalars(select(Message).where(Message.is_sent == 0 and Message.user_id == user_id).order_by(Message.sending_time))
+
 async def addMessage(user_id: int,chat_id: int,sending_time: datetime,message_text: str):
     async with async_session() as session:
         session.add(Message(user_id=user_id,chat_id=chat_id,sending_time=sending_time,message_text=message_text,is_sent=0))
