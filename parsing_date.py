@@ -9,7 +9,7 @@ def parse_date(text: str) -> datetime:
     parsed = dateparser.parse(text, settings=settings)
     if not parsed:
         raise ValueError("Не могу распознать дату :(")
-    return parsed
+    return parsed.replace(second=0,microsecond=0)
 
 def convertToMoscowTime(time: datetime)->datetime:
     return time.astimezone(ZoneInfo("Europe/Moscow"))

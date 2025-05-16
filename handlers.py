@@ -74,7 +74,7 @@ async def check(message: Message):
         answer += '"' + msg.message_text[:10] + "..." + '"' +" | " + msg.sending_time.strftime("%d %b %Y %H:%M") + "\n"
         count += 1
     if count == 0:
-        await message.answer("Вы ещё не отправили ни одного сообщения! Используй /send, чтобы отправить его!")
+        await message.answer("У вас нет сообщений в будущем! Используй /send, чтобы отправить!")
     else:
         await message.answer(answer)
 
